@@ -1,5 +1,13 @@
 import requests
 from bs4 import BeautifulSoup
+import sqlalchemy as db
+
+#Pre: Exchange rates is a vector of tuple with the following format: [('MXN', '20.6048'),...]
+def updateExchangeRatesTable(exchangeRates):
+    engine = db.create_engine('dialect+driver://user:pass@host:port/db') #How SQLAlchemy communicate with DB
+
+    Session = sessionmaker(bind=engine)
+    session = Session()
 
 #Return a vector of tuple with the exchange rate for the currency code given. Ex: [('MXN', '20.6048'),...]
 def exchangeRateAgainstUSD(currencyCodes):
